@@ -1,0 +1,32 @@
+package utilities;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
+import javax.lang.model.element.Element;
+
+import org.openqa.selenium.WebElement;
+
+public class FileUPloadUtility {
+	public void fileUploadUsingSendKeys(WebElement element,String path)
+	{
+		element.sendKeys(path);
+	}
+public void fileUploadUsingRobotClass(WebElement element,String path) throws AWTException
+{
+	element.click();
+	StringSelection stringselection=new StringSelection(path);
+	Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringselection, null);
+	Robot robot=new Robot();
+	robot.delay(3000);
+	robot.keyPress(KeyEvent.VK_CONTROL);
+	robot.keyPress(KeyEvent.VK_V);
+	robot.keyRelease(KeyEvent.VK_CONTROL);
+	robot.keyRelease(KeyEvent.VK_V);
+	robot.keyPress(KeyEvent.VK_ENTER);
+	robot.keyRelease(KeyEvent.VK_ENTER);
+}
+}
